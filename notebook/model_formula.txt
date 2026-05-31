@@ -1,0 +1,4 @@
+Predicted Score = 1.96 × (Study Hours) + 73.51
+
+Example: 5 hours → 83.3 points
+Example: 8 hours → 89.2 points
