@@ -1,0 +1,27 @@
+<!-- index.html - extends base.html (inherits layout) -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h1>📘 Welcome to Your UI/UX Study Notebook</h1>
+    <p>This is a web-based version of your BCA 2nd Semester UI/UX Design notes.</p>
+    <p>Built with <strong>Flask</strong> and <strong>Jinja2 templating</strong>.</p>
+</div>
+
+<div class="card">
+    <h2>📋 What You'll Learn</h2>
+    <ul>
+        <li>✅ Fundamentals of UX and UI</li>
+        <li>✅ UX vs UI - Roles and Responsibilities</li>
+        <li>✅ UX Principles (Usability, Accessibility, Simplicity)</li>
+        <li>✅ Core Disciplines of UX</li>
+        <li>✅ Types of User Interfaces (CLI, GUI, VUI, etc.)</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>🚀 Quick Links</h2>
+    <a href="{{ url_for('topics_list') }}" class="btn">View All Topics →</a>
+    <a href="{{ url_for('user_profile', username='ram') }}" class="btn">View Sample Profile →</a>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h1>👤 User Profile</h1>
+
+    <!-- Display user data passed from Python -->
+    <p><strong>Username:</strong> {{ username }}</p>
+    <p><strong>Full Name:</strong> {{ user.name }}</p>
+    <p><strong>Role:</strong> {{ user.role }}</p>
+    <p><strong>Batch:</strong> {{ user.batch }}</p>
+</div>
+
+<div class="card">
+    <h2>🔗 Try Different Users</h2>
+    <p>Change the URL to see different profiles:</p>
+    <ul>
+        <li><a href="{{ url_for('user_profile', username='priya') }}">/user/priya</a></li>
+        <li><a href="{{ url_for('user_profile', username='ram') }}">/user/ram</a></li>
+        <li><a href="{{ url_for('user_profile', username='anything') }}">/user/anything (Guest)</a></li>
+    </ul>
+</div>
+{% endblock %}

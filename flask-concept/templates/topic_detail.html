@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h1>📖 {{ topic.name }}</h1>
+
+    <p><strong>Description:</strong> {{ topic.description }}</p>
+    <p><strong>Study Hours:</strong> {{ topic.hours }} hours</p>
+
+    <a href="{{ url_for('topics_list') }}" class="btn">← Back to all topics</a>
+</div>
+
+<div class="card">
+    <h2>📝 Study Notes for {{ topic.name }}</h2>
+    <p>This is where you would add your detailed notes from the UI/UX notebook.</p>
+    <p>Example key points for this topic:</p>
+    <ul>
+        <li>Key concept 1</li>
+        <li>Key concept 2</li>
+        <li>Real-world example</li>
+    </ul>
+</div>
+{% endblock %}

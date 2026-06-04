@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h1>ℹ️ About This Project</h1>
+    <p>This Flask application is part of your UI/UX study notebook for BCA 2nd Semester, Tribhuvan University.</p>
+
+    <h2>📌 Technologies Used</h2>
+    <ul>
+        <li><strong>Python Flask</strong> - Backend web framework</li>
+        <li><strong>Jinja2</strong> - Templating engine (for dynamic HTML)</li>
+        <li><strong>HTML5 & CSS3</strong> - Frontend styling</li>
+    </ul>
+
+    <h2>🎯 Learning Objectives</h2>
+    <ul>
+        <li>Understand how Flask routes work</li>
+        <li>Learn to pass data from Python to HTML templates</li>
+        <li>Use template inheritance with <code>{% raw %}{% extends %}{% endraw %}</code> and
+            <code>{% raw %}{% block %}{% endraw %}</code></li>
+        <li>Display dynamic content using <code>{% raw %}{{ variable }}{% endraw %}</code> and loops
+            (<code>{% raw %}{% for %}{% endraw %}</code>)</li>
+    </ul>
+</div>
+{% endblock %}
