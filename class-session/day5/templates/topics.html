@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+</head>
+
+<body>
+    <h1>{{ title }}</h1>
+    <ul>
+        {% for topic in topics %}
+        <li>
+            <h2>{{ topic['name'] }}</h2>
+            <p>{{ topic['description'] }}</p>
+            <p><strong>Hours:</strong> {{ topic['hours'] }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
