@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Score Predictor - Multi-Feature</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .score-section {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .score {
+            font-size: 72px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .grade {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .recommendations {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .recommendations h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .recommendations ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+
+        .recommendations li {
+            margin: 5px 0;
+        }
+
+        .contributions {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .contributions h4 {
+            color: #31708f;
+            margin-bottom: 10px;
+        }
+
+        .contribution-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #cce5ff;
+        }
+
+        .input-summary {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .input-summary h4 {
+            margin-bottom: 10px;
+        }
+
+        .input-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .nav-button {
+            flex: 1;
+            background: #6c757d;
+            text-align: center;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .nav-button:hover {
+            background: #5a6268;
+            transform: none;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 12px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+
+            .score {
+                font-size: 48px;
+            }
+
+            .grade {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 Advanced Student Score Predictor</h1>
+            <p>Get accurate predictions using 5 different factors</p>
+        </div>
+
+        <div class="content">
+            <form method="POST" action="/predict">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="hours">📚 Hours Studied per Day:</label>
+                        <input type="number" step="0.5" name="hours" id="hours" placeholder="1-12 hours" min="0"
+                            max="15" value="{{ hours if hours else 5 }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="previous_score">📊 Previous Score (%):</label>
+                        <input type="number" step="1" name="previous_score" id="previous_score" placeholder="40-100"
+                            min="0" max="100" value="{{ previous_score if previous_score else 70 }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="attendance">📈 Attendance (%):</label>
+                        <input type="number" step="1" name="attendance" id="attendance" placeholder="50-100" min="0"
+                            max="100" value="{{ attendance if attendance else 80 }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sleep_hours">😴 Sleep Hours per Night:</label>
+                        <input type="number" step="0.5" name="sleep_hours" id="sleep_hours" placeholder="4-10 hours"
+                            min="0" max="12" value="{{ sleep_hours if sleep_hours else 7 }}" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="extracurricular">🎭 Extracurricular Activities:</label>
+                        <select name="extracurricular" id="extracurricular">
+                            <option value="Yes" {% if extracurricular=='Yes' %}selected{% endif %}>Yes</option>
+                            <option value="No" {% if extracurricular=='No' %}selected{% endif %}>No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit">🔮 Predict My Score</button>
+            </form>
+
+            {% if error %}
+            <div class="error">
+                <strong>❌ Error:</strong> {{ error }}
+            </div>
+            {% endif %}
+
+            {% if prediction %}
+            <div class="result">
+                <div class="score-section">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: {{ prediction }}%;"></div>
+                    </div>
+                    <div class="score" style="color: {{ color }};">{{ prediction }}</div>
+                    <div class="grade">Grade: {{ grade }}</div>
+                    <p>{{ message }}</p>
+                    <p style="margin-top: 10px;"><strong>{{ short_advice }}</strong></p>
+                </div>
+
+                <div class="recommendations">
+                    <h4>💡 Personalized Recommendations:</h4>
+                    <ul>
+                        {% for rec in recommendations %}
+                        <li>{{ rec }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="contributions">
+                    <h4>📊 Score Contribution Breakdown:</h4>
+                    {% for factor, value in contributions.items() %}
+                    <div class="contribution-item">
+                        <span>{{ factor }}:</span>
+                        <span><strong>{{ "%.1f"|format(value) }}</strong> points</span>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="input-summary">
+                    <h4>📝 Your Input Summary:</h4>
+                    <div class="input-summary-grid">
+                        <div>📚 Study Hours: {{ hours }} hours/day</div>
+                        <div>📊 Previous Score: {{ previous_score }}%</div>
+                        <div>📈 Attendance: {{ attendance }}%</div>
+                        <div>😴 Sleep Hours: {{ sleep_hours }} hours/night</div>
+                        <div>🎭 Extracurricular: {{ extracurricular }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="nav-buttons">
+                <a href="/" class="nav-button">🏠 New Prediction</a>
+                <a href="/about" class="nav-button">ℹ️ About Model</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>💡 This model uses 5 factors to predict your performance</p>
+            <p>📊 Study more, attend classes, sleep well, and participate in activities!</p>
+        </div>
+    </div>
+</body>
+
+</html>
